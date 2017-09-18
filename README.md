@@ -1,4 +1,9 @@
 
+
+			DataBinding介绍使用
+
+
+
 1.DataBinding介绍
     2015年谷歌I/O大会上介绍了一个框架DataBinding，DataBinding是一个数据绑定框架DataBinding主要解决了两个问题： 
 - 需要多次使用findViewById，损害了应用性能且令人厌烦 
@@ -20,7 +25,7 @@
     a.不再findviewbyid
       新建一个项目 用layout创建activity——main布局
                <!--布局以layout作为根布局-->
-                <layout>
+               <layout>
                     <!--我们需要展示的布局-->
                     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:tools="http://schemas.android.com/tools"
@@ -104,7 +109,7 @@ activity中为view设置状态调用刚才命名的name的set方法即可为view
 	
 	
 	
-3.view绑定PoJo数据
+3.view绑定Model数据
 简单创建一个User的数据模型
 
 			public class User {
@@ -137,6 +142,74 @@ activity中为view设置状态调用刚才命名的name的set方法即可为view
 然后，在java代码中创建一个user对象，并设置text字段
 		User u = new User("sunhailong");
 		binding.setUser(u);  调用set方法，即可实现model与view的绑定
+		
+		
+			
+		
+d. 绑定点击事件
+     1.注册点击事件回调
+     	定义一个接口
+			public interface ClickListener{
+			public void click1(View v);
+		    }
+     	   布局data中加入引用
+     		     <variable
+            		name="clickEvent"
+            		type="com.example.sunhailong01.databinding.User.ClickListener"/>
+	    button中加入点击事件
+			 <Button
+			    android:id="@+id/button2"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:text="@{callbackClick}"
+			    android:clickable="@{enabled}"
+			    android:onClick="@{clickEvent.click1}"/>
+			
+		 xml点击事件的引用写法有以下几种写法
+			  1.android:onClick="@{event.click1}"
+			  2.android:onClick="@{event::click2}"
+			  3.android:onClick="@{()->event.cilck3(title4)}"
+			    [注]：()->event.cilck3(title4)是lambda表达式写法，
+			   
+	  最后在代码中注册点击事件
+			    binding.setClickEvent(new User.ClickListener() {
+			    @Override
+			    public void click1(View v) {
+				Toast.makeText(getBaseContext(), "button3 callback方式点击", Toast.LENGTH_LONG).show();
+			    }
+			});
+
+			    
+		
+     2.直接接收点击事件
+     	定义一个方法作为点击事件的接收 
+		    public void ClickEvent(View view) {
+			switch (view.getId()) {
+			    case R.id.button3:
+				Toast.makeText(context, "button3 User点击", Toast.LENGTH_LONG).show();
+				break;
+			    default:
+				break;
+			}
+
+		    }
+		    
+	  然后只需要在button中增加该方法的引用即可
+		    <Button
+			    android:id="@+id/button3"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:text="@{userclick}"
+			    android:clickable="@{enabled}"
+			    android:onClick="@{user::ClickEvent}"/>
+			    
+	  此时，ActivityMainBinding中自动增加一个oncick方法，即可响应点击事件
+	  
+	  
+			    
+     
+     	
+			
 		
 		
 		
