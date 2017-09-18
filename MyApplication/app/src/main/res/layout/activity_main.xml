@@ -1,18 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.sunhailong01.databinding.MainActivity">
+<!--布局以layout作为根布局-->
+<layout>
+    <!--我们需要展示的布局-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <!--绑定基本数据类型及String-->
+        <!--name:   和java代码中的对象是类似的，名字自定义-->
+        <!--type:   和java代码中的类型是一致的-->
+        <variable
+            name="callbackClick"
+            type="String" />
+        <variable
+            name="userclick"
+            type="String" />
 
-</android.support.constraint.ConstraintLayout>
+        <variable
+            name="enabled"
+            type="boolean" />
+        <variable
+            name="buttoncolor"
+            type="int"/>
+
+        <variable
+            name="user"
+            type="com.example.sunhailong01.databinding.User" />
+        <variable
+            name="clickEvent"
+            type="com.example.sunhailong01.databinding.User.ClickListener"/>
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.text}"
+            android:clickable="@{enabled}"
+            android:background="@{buttoncolor}"/>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{callbackClick}"
+            android:clickable="@{enabled}"
+            android:onClick="@{clickEvent.click1}"/>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{userclick}"
+            android:clickable="@{enabled}"
+            android:onClick="@{user::ClickEvent}"/>
+
+    </LinearLayout>
+
+</layout>
