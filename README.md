@@ -57,7 +57,51 @@
         });
     }
 }
-                
+
+b.view与基本数据类型及String绑定
+				<!--布局以layout作为根布局-->
+				<layout>
+				    <!--我们需要展示的布局-->
+				    <data>
+
+					<variable
+					    name="buttonname"
+					    type="String" />
+
+					<variable
+					    name="enabled"
+					    type="boolean" />
+					<variable
+					    name="buttoncolor"
+					    type="int"/>
+				    </data>
+				    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+					xmlns:tools="http://schemas.android.com/tools"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:orientation="vertical"
+					tools:context=".MainActivity">
+					<Button
+					    android:id="@+id/button1"
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:text="@{buttonname}"
+					    android:clickable="@{enabled}"
+					    android:background="@{buttoncolor}"/>
+				    </LinearLayout>
+
+				</layout>
+				
+        name:对象命名，类似于id
+        type:  和java代码中的类型是一致的
+	
+activity中为view设置状态调用刚才命名的name的set方法即可为view设置状态
+	binding.setButtonname("第一个button"); // button的text
+        binding.setEnabled(true); // button可点击
+        binding.setButtoncolor(R.color.colorPrimaryDark); // button颜色
+	
+
+                
                 
                 
                 
