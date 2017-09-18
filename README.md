@@ -94,11 +94,63 @@ b.view与基本数据类型及String绑定
 				
         name:对象命名，类似于id
         type:  和java代码中的类型是一致的
+	在布局中是通过@{}来绑定数据的，{}中是布局中该控件属性对应的数据类型数据
 	
 activity中为view设置状态调用刚才命名的name的set方法即可为view设置状态
 	binding.setButtonname("第一个button"); // button的text
         binding.setEnabled(true); // button可点击
         binding.setButtoncolor(R.color.colorPrimaryDark); // button颜色
+	
+	
+	
+	
+3.view绑定PoJo数据
+简单创建一个User的数据模型
+
+			public class User {
+			    private String text;
+
+			    public User(String text) {
+				this.text = text;
+			    }
+
+			    public String getText() {
+				return text;
+			    }
+
+			    public void setText(String text) {
+				this.text = text;
+			    }
+			}
+布局中增加数据模型引用
+        <variable
+            name="user"
+            type="com.example.sunhailong01.databinding.User" />
+此时在button中即可以拿到该bean的字段引用，当该bean的text改变时，即可更新button状态
+	  <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.text}"
+            android:clickable="@{enabled}"
+            android:background="@{buttoncolor}"/>
+然后，在java代码中创建一个user对象，并设置text字段
+		User u = new User("sunhailong");
+		binding.setUser(u);  调用set方法，即可实现model与view的绑定
+		
+		
+		
+	    
+	    
+	    
+	    
+	    
+
+
+
+		
+	
+	
 	
 
                 
