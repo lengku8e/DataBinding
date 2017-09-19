@@ -421,6 +421,51 @@ public class User  extends BaseObservable{
 		notifyPropertyChanged(BR.参数名)通知更新这一个参数，
 需要与@Bindable注解配合使用。notifyChange()通知更新所有参数，可以不用和@Bindable注解配合使用
 
+
+
+
+
+Observable数据实现改变自动更新
+    通过Observable数据不再需要 bindable标签即可实现数据动态更新的方式
+    它的子类有BaseObservable,ObservableField,ObservableBoolean, ObservableByte, ObservableChar, ObservableShort, ObservableInt, 	           ObservableLong, ObservableFloat, ObservableDouble, and ObservableParcelable，ObservableArrayList,ObservableArrayMap
+    
+    首先，data中定义两个obserble数据类型
+	    <variable
+		    name="list"
+		    type="android.databinding.ObservableArrayList&lt;String&gt;"/>
+
+		<variable
+		    name="map"
+		    type="android.databinding.ObservableArrayMap&lt;String,String&gt;"/>
+	    这里要注意泛型的使用，泛型的支持会在编译时期报红线，但是是可以直接运行的，但是需要通过转义字符才行，使用&lt;数据类型&gt，如果有两个变量，     中间用“，”隔开
+	   
+	   
+	 java代码中 需要
+	      // 使用  ObservableArrayList
+	final ObservableArrayList<String> list = new ObservableArrayList<>();
+	list.add("cat");
+	binding.setList(list);
+	// 使用  ObservableMap
+	final ObservableArrayMap<String, String> map = new ObservableArrayMap<>();
+	map.put("name","dog");
+	binding.setMap(map);
+
+	  如果list动态可变，那么会通知到该list引用的位置，进行数据更新
+
+	  也可使用ObservableField或ObservableInt 
+		public final ObservableField<String> myObName  = new ObservableField<>() ;
+		public final ObservableInt myObAge = new ObservableInt();
+	  系统会自动生成两个变量的set和get方法,控制变量的更改
+	
+	  
+	  
+	  
+	    
+	    
+	    
+
+
+
 		
 		
 		
