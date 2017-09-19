@@ -36,6 +36,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:hint="动态数据使用"
+            android:text="@{user.name + user.age}"/>
        <!--使用运算符-->
         <Button
             android:id="@+id/button1"

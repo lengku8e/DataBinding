@@ -6,6 +6,6 @@ package com.example.sunhailong01.databinding;
 
 public class ClassUtil {
     public static String getClassName(Object object) {
-        return object.getClass().getName();
+        return "动态改变数据";
     }
 }

@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         binding.setCallbackClick("通过callback点击");
         binding.setClickEvent(new User.ClickListener() {
             @Override
@@ -40,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.setUserclick("user模型中的点击"); // button的text
         binding.setButtoncolor(R.color.colorPrimaryDark); // button颜色
-        u = new User(null, getBaseContext());
+        u = new User(null, getBaseContext(), "龙海孙", 21);
         binding.setUser(u);
-
     }
 }
