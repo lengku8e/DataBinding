@@ -1,6 +1,8 @@
 package com.example.sunhailong01.databinding;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,12 +35,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void click1(View v) {
                 Toast.makeText(getBaseContext(), "button3 callback方式点击", Toast.LENGTH_LONG).show();
+//                动态改变数据
+                // 使用 ObservableInt
+                u.myObAge.set(111);
+                // 使用 ObservableFiled
+                u.myObName.set("sunlonghai");
             }
         });
 
         binding.setUserclick("user模型中的点击"); // button的text
         binding.setButtoncolor(R.color.colorPrimaryDark); // button颜色
         u = new User(null, getBaseContext(), "龙海孙", 21);
+
+
+
+        // 使用  ObservableArrayList
+        final ObservableArrayList<String> list = new ObservableArrayList<>();
+        list.add("dog");
+        binding.setList(list);
+        // 使用  ObservableMap
+        final ObservableArrayMap<String, String> map = new ObservableArrayMap<>();
+        map.put("name","Tom");
+        binding.setMap(map);
+
         binding.setUser(u);
     }
 }

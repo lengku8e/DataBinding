@@ -3,6 +3,8 @@ package com.example.sunhailong01.databinding;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +16,10 @@ public class User  extends BaseObservable{
 
     private String text;
     private Context context;
+    public final ObservableField<String> myObName  = new ObservableField<>() ;
+    public final ObservableInt myObAge = new ObservableInt();
+
+
     @Bindable
     public String getName() {
         return name;
