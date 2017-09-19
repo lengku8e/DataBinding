@@ -302,6 +302,145 @@ d. 绑定点击事件
 			
 			
 			
+databinding 动态数据加载
+    实现:根据model变量改变自动更新数据
+    布局中增加一个textview，想要实现根据user的name和age的变化动态更新数据
+		    <TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:gravity="center"
+			    android:textSize="24dp"
+			    android:hint="动态数据使用"
+			    android:text="@{user.name + user.age}"/>
+	    
+	    增加一个button
+		       <Button
+			    android:id="@+id/button4"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:text="@{ClassUtil.getClassName(user)}"
+			    android:clickable="@{enabled}"
+			    android:onClick="@{user::ClickEvent}"/>
+	    
+	    点击事件，动态改变user的name和age
+		      public void ClickEvent(View view) {
+				switch (view.getId()) {
+				    case R.id.button3:
+					Toast.makeText(context, "button3 User点击", Toast.LENGTH_LONG).show();
+					break;
+				    case R.id.button4:
+					setNameg("孙海龙");
+					setAge(26);
+					break;
+				    default:
+					break;
+				}
+
+			    }
+		    
+		    
+		    
+	User 类代码
+	User类继承BaseObservable,BaseObservable实现android.databinding.Observable接口，Observable接口可以允许附加一个监听器到model对象以便监听对象上的所有属性的变化。
+	
+
+
+/**
+ * Created by sunhailong01 on 17/9/18.
+ */
+
+public class User  extends BaseObservable{
+
+    private String text;
+    private Context context;
+    @Bindable
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+        notifyPropertyChanged(com.example.sunhailong01.databinding.BR.name);
+    }
+    @Bindable
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+        notifyPropertyChanged(com.example.sunhailong01.databinding.BR.age);
+    }
+
+    private String name;
+    private int age;
+    public User(String text, Context context, String name, int age) {
+        this.text = text;
+        this.context = context;
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+
+    public interface ClickListener{
+        public void click1(View v);
+    }
+
+
+    public void ClickEvent(View view) {
+        switch (view.getId()) {
+            case R.id.button3:
+                Toast.makeText(context, "button3 User点击", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.button4:
+                setName("孙海龙");
+                setAge(26);
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+
+
+	 给需要动态变化的数据的get或set方法增加  @Bindable 注解， Observable接口有一个机制来添加和删除监听器，但通知与否由开发人员管理。为了使开发更容易，BaseObservable实现了监听器注册机制。DataBinding实现类依然负责通知当属性改变时。这是通过指定一个Bindable注解给getter以及setter内通知来完成的。
+ 	此时，在com.example.sunhailong01.databinding.BR 文件中会增加age字段的引用
+ 
+ 	然后，在数据变化时候调用notifyPropertyChanged，传入age的id即可实现动态变化
+  		notifyPropertyChanged(com.example.sunhailong01.databinding.BR.age);
+		notifyPropertyChanged(BR.参数名)通知更新这一个参数，
+需要与@Bindable注解配合使用。notifyChange()通知更新所有参数，可以不用和@Bindable注解配合使用
+
+		
+		
+		
+		
+
+		     
+		    
+		    
+		    
+
+    
+    
+
+   
+
+
+			
+			
+			
+			
 	 
 	
 				   
