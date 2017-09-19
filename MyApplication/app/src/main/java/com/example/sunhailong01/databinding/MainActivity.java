@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.setUserclick("user模型中的点击"); // button的text
         binding.setButtoncolor(R.color.colorPrimaryDark); // button颜色
-        u = new User("sunhailong", getBaseContext());
+        u = new User(null, getBaseContext());
         binding.setUser(u);
 
     }
