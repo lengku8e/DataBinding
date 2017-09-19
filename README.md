@@ -206,6 +206,111 @@ d. 绑定点击事件
 	  此时，ActivityMainBinding中自动增加一个oncick方法，即可响应点击事件
 	  
 	  
+	  
+	  
+	  
+
+
+
+进阶使用
+
+  1.Databinding实现xml中调用静态方法
+				 <data>
+					<variable
+					    name="callbackClick"
+					    type="String" />
+					<variable
+					    name="userclick"
+					    type="String" />
+
+					<variable
+					    name="enabled"
+					    type="boolean" />
+					<variable
+					    name="buttoncolor"
+					    type="int"/>
+
+					<variable
+					    name="user"
+					    type="com.example.sunhailong01.databinding.User" />
+					<variable
+					    name="clickEvent"
+					    type="com.example.sunhailong01.databinding.User.ClickListener"/>
+					
+					// 通过在data中import 静态Util类，实现类似导包功能，此时在xml中即可使用该静态类中的防范
+					<import type="com.example.sunhailong01.databinding.ClassUtil"/>
+
+		    		</data>
+  		
+		
+  				<Button
+				    android:id="@+id/button4"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    
+				   // 这里可以直接使用静态类中的方法
+				    android:text="@{ClassUtil.getClassName(user)}"
+				    android:clickable="@{enabled}"
+				    android:onClick="@{user::ClickEvent}"/>
+				    
+				    
+				    
+2.使用xml中使用运算符操作数据
+	 实现在xml中进行一些数据逻辑判断处理，而展示不同的内容
+	 
+	 <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+	    // 实现了当user text 为空时 使用 @string/app_name 不空时使用text 等价与   
+	    // android:text="@{user2.content!=null? user2.content : @string/app_name}
+            android:text="@{user.text ?? @string/app_name}"
+            android:clickable="@{enabled}"
+            android:background="@{buttoncolor}"/>
+	    
+	    支持的运算符有：
+	    		数学表达式： + - / * %
+
+			字符串拼接 +
+
+			逻辑表达式 && ||
+
+			位操作符 & | ^
+
+			一元操作符 + - ! ~
+
+			位移操作符 >> >>> <<
+
+			比较操作符 == > < >= <=
+
+			instanceof
+
+			分组操作符 ()
+
+			字面量 - character, String, numeric, null
+
+			强转、方法调用
+
+			字段访问
+
+			数组访问 []
+
+			三元操作符 ?:
+
+			聚合判断（Null Coalescing Operator）语法 ‘??’
+			
+			
+			
+			
+	 
+	
+				   
+				    
+				    
+				    
+  
+	  
+	  
 			    
      
      	
