@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+    <data>
+        <variable
+            name="content"
+            type="com.example.sunhailong01.databinding.Content"/>
+    </data>
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="56dp"
+        android:layout_width="match_parent"
+        app:title="@{content.title}"
+        app:subtitle="@{content.subTitle}"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@android:color/white"
+        app:subtitleTextColor="@android:color/white" />
+</layout>

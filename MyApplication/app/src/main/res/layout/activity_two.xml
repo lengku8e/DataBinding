@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--我们需要展示的布局-->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+       <Button
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="动态改变list数据"
+           android:id="@+id/resetData"/>
+
+        <ListView
+            android:id="@+id/hisListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@android:color/transparent"
+            android:divider="@null"
+            android:scrollbars="none"
+            android:overScrollMode="ifContentScrolls"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+        />
+    </LinearLayout>
+
+
+</layout>

@@ -1,5 +1,6 @@
 package com.example.sunhailong01.databinding;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableArrayMap;
@@ -40,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
                 u.myObAge.set(111);
                 // 使用 ObservableFiled
                 u.myObName.set("sunlonghai");
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, TwoActivity.class);
+                startActivity(intent);
             }
         });
 
